@@ -5,8 +5,10 @@ Dependencies: `python3`, `pip`, `selenium`, `chromedriver`
 
 ## To Use:
 
-Simply clone the repo and open `init.sh` in your chosen terminal client and follow the instructions.
+Simply clone the repo and open `init.sh` in your chosen terminal client (Right Click > Open With...) and follow the instructions.
 
-## Roadmap
+## Authentication
 
-Currently for WP Engine internal use only, so OKTA credentials and appropriate LDAP permission-sets are required. Will be building in logic for more general authentication in next version.
+Supports WP Engine internal use with OKTA credentials and appropriate LDAP permission-sets. Also support standard login. Does not support customer MFA or SSO login methods.
+
+It is recommended you create a dedicated user account in the User Portal with the minimum access required for this script with username/password authentication. It is also recommended this account be decomissioned and reprovisioned periodically.
