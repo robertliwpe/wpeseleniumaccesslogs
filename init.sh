@@ -3,7 +3,8 @@
 printf "\r\n\r\n=====================================================================================\r\n\r\n"
 printf '\e[1;34m%-6s\e[m' "WP Engine User Portal Access Logs Automator"
 printf "\r\n\r\n=====================================================================================\r\n\r\n"
-printf "This will deploy a python script to download Complete Access Logs (within last 2 calendar days) from chosen installs\r\nDependencies: python3 pip selenium chromedriver\r\n\r\n"
+printf "This will deploy a python script to download Complete Access Logs (within last 2 calendar days) from chosen installs\r\nThis script does not work with customer MFA or SSO. It is recommended you create a dedicated user account in the User Portal with the minimum access required for this script.\r\nDependencies: python3 pip selenium chromedriver\r\n\r\n"
+printf "NOTE: Pendo notification popups in the User Portal WILL DISRUPT THIS SCRIPT. If Any unexpected notifications or popups do occur, rerun this script.\r\n\r\n"
 
 if [ ! -f "./globalvars.txt" ];
 then
@@ -56,7 +57,7 @@ printf "\r\nWould you like to cache your install list? (y/n)\r\n"
 read -r installcache
 
 if [ "$installcache" != "${installcache#[Yy]}" ] ;
-then 
+then
     printf "Installs cached in installist.txt\r\n"
 else
     printf "Removing...\r\n"

@@ -37,7 +37,7 @@ print(install_list_arr)
 
 print(f"\n========== ACTIONS START ==========")
 
-# Login via OKTA
+# Login
 
 driver.get("https://my.wpengine.com/sites")
 
@@ -64,12 +64,16 @@ driver.implicitly_wait(3)
 
 print(driver.current_url)
 print(driver.title)
-print("Open your MFA App to Verify Login")
 
-#okta_button = driver.find_element_by_css_selector("#form64 > div.o-form-button-bar > input").click()
+# OKTA for WPE Employee Login
 
-okta_button = driver.find_element(By.CSS_SELECTOR, "#form64 > div.o-form-button-bar > input")
-okta_button.click()
+if "sso/saml" in driver.current_url:
+    print("Open your MFA App to Verify Login")
+    #okta_button = driver.find_element_by_css_selector("#form64 > div.o-form-button-bar > input").click()
+    okta_button = driver.find_element(By.CSS_SELECTOR, "#form64 > div.o-form-button-bar > input")
+    okta_button.click()
+else:
+    pass
 
 # Sites Experience
 
