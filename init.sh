@@ -41,7 +41,7 @@ wait 3
 printf "\r\nDownload Operation COMPLETE! Feel free to close the open Chrome Browser...\r\n"
 printf "Initiating cleanup...\r\n"
 
-printf "\r\nWould you like to cache your username password combination? (y/n)\r\n"
+printf "\r\nWould you like to cache your username password combination (NOT RECOMMENDED)? (y/n)\r\n"
 read -r unamecache
 
 if [ "$unamecache" != "${unamecache#[Yy]}" ] ;
