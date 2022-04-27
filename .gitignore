@@ -561,3 +561,5 @@ cython_debug/
 # Custom
 globalvars.txt
 installlist.txt
+*.zip
+.DS_Store
