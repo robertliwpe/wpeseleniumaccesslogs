@@ -1,6 +1,6 @@
 #!/bin/bash
 
-printf "\r\n\r\n=====================================================================================\r\n\r\n"
+printf "\r\n=====================================================================================\r\n\r\n"
 printf '\e[1;34m%-6s\e[m' "WP Engine User Portal Access Logs Automator"
 printf "\r\n\r\n=====================================================================================\r\n\r\n"
 printf "This will deploy a python script to download Complete Access Logs (within last 2 calendar days) from chosen installs\r\nThis script does not work with customer MFA or SSO. It is recommended you create a dedicated user account in the User Portal with the minimum access required for this script.\r\nDependencies: python3 pip selenium chromedriver\r\n\r\n"
