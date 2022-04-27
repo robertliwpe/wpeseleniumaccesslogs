@@ -37,8 +37,8 @@ printf "\r\nExecuting Access Log Download script now...\r\n\r\n"
 
 python3 ./accesslogpullv1.py
 
-wait 3
 printf "\r\nDownload Operation COMPLETE! Feel free to close the open Chrome Browser...\r\n"
+sleep 2
 printf "Initiating cleanup...\r\n"
 
 printf "\r\nWould you like to cache your username password combination (NOT RECOMMENDED)? (y/n)\r\n"
