@@ -15,6 +15,8 @@ install_list = linecache.getline('installlist.txt', 2)
 
 install_list_arr = install_list.split()
 
+default_response = linecache.getline('globalvars.txt', 6)
+
 # Initialize Chrome Session
 
 driver = webdriver.Chrome('chromedriver')
@@ -42,6 +44,8 @@ print(f"\n========== ACTIONS START ==========")
 driver.get("https://my.wpengine.com/sites")
 
 print(driver.title)
+
+username_login_wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "username")))
 
 #username_login = driver.find_element_by_name("username")
 username_login = driver.find_element(By.NAME, "username")

@@ -19,8 +19,12 @@ then
     stty echo
     echo "# Password" >> ./globalvars.txt 
     echo "$password" >> ./globalvars.txt 
+
+    read -r -p "Do you want default \"Y\" responses to prompts? (y/n) (Select Y if you plan on running this unattended) " defaultresp
+    echo "# Default Response Value" >> ./globalvars.txt 
+    echo "$defaultresp" >> ./globalvars.txt 
 else
-    printf "Username Password found in globalvars.txt\r\n"
+    printf "Username Password & Defaults found in globalvars.txt\r\n"
 fi;
 
 if [ ! -f "./installlist.txt" ];
@@ -41,9 +45,16 @@ python3 ./accesslogpullv1.py
 printf "\r\nDownload Operation COMPLETE! Feel free to close the open Chrome Browser...\r\n"
 sleep 2
 printf "Initiating cleanup...\r\n"
+printf "Timeouts to all prompts from this point are 3 SECONDS...\r\n"
 
-printf "\r\nWould you like to cache your username password combination (NOT RECOMMENDED)? (y/n)\r\n"
+defaultrepout=$(cat ./globalvars.txt | tail -1)
+
+printf '%s' "Current default response to prompts is: $defaultrepout"
+
+TMOUT=3
+printf "\r\n\r\nWould you like to cache your username password combination (NOT RECOMMENDED)? (y/n)\r\n"
 read -r unamecache
+unamecache=${unamecache:-$defaultrepout}
 
 if [ "$unamecache" != "${unamecache#[Yy]}" ] ;
 then 
@@ -53,8 +64,10 @@ else
     rm ./globalvars.txt
 fi;
 
+TMOUT=3
 printf "\r\nWould you like to cache your install list? (y/n)\r\n"
 read -r installcache
+installcache=${installcache:-$defaultrepout}
 
 if [ "$installcache" != "${installcache#[Yy]}" ] ;
 then
@@ -63,3 +76,6 @@ else
     printf "Removing...\r\n"
     rm ./installlist.txt
 fi;
+
+printf "\r\n"
+TMOUT=0
