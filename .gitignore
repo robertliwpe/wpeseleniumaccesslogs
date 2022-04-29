@@ -563,3 +563,4 @@ globalvars.txt
 installlist.txt
 *.zip
 .DS_Store
+filekey.key

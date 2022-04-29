@@ -3,7 +3,7 @@
 printf "\r\n=====================================================================================\r\n\r\n"
 printf '\e[1;34m%-6s\e[m' "WP Engine User Portal Access Logs Automator"
 printf "\r\n\r\n=====================================================================================\r\n\r\n"
-printf "This will deploy a python script to download Complete Access Logs (within last 2 calendar days) from chosen installs\r\nThis script does not work with customer MFA or SSO. It is recommended you create a dedicated user account in the User Portal with the minimum access required for this script.\r\nDependencies: python3 pip selenium chromedriver\r\n\r\n"
+printf "This will deploy a python script to download Complete Access Logs (within last 2 calendar days) from chosen installs\r\nThis script does not work with customer MFA or SSO. It is recommended you create a dedicated user account in the User Portal with the minimum access required for this script. Ensure that all files are kept within the same directory.\r\nDependencies: python3 pip selenium chromedriver\r\n\r\n"
 printf "NOTE: Pendo notification popups in the User Portal WILL DISRUPT THIS SCRIPT. If Any unexpected notifications or popups do occur, rerun this script.\r\n\r\n"
 
 if [ ! -f "./globalvars.txt" ];
@@ -24,7 +24,8 @@ then
     echo "# Default Response Value" >> ./globalvars.txt 
     echo "$defaultresp" >> ./globalvars.txt 
 else
-    printf "Username Password & Defaults found in globalvars.txt\r\n"
+    printf "Username Password & Defaults found in globalvars.txt\r\nDecrypting...\r\n"
+    python3 ./decry.py
 fi;
 
 if [ ! -f "./installlist.txt" ];
@@ -57,7 +58,17 @@ read -r unamecache
 unamecache=${unamecache:-$defaultrepout}
 
 if [ "$unamecache" != "${unamecache#[Yy]}" ] ;
-then 
+then
+    if [[ -f filekey.key ]]
+    then
+        printf "Encryption Key found\r\nEncrypting Username Password...\r\n"
+        python3 ./enc.py
+    else
+        printf "Encryption Key NOT found\r\nCreating...\r\n"
+        python3 ./gen.py
+        printf "Encryption Key CREATED! Do NOT delete otherwise your Username and Password will be lost forever\r\nCommencing Encryption...\r\n"
+        python3 ./enc.py
+    fi
     printf "Username Password combination kept in globalvars.txt\r\n"
 else
     printf "Removing...\r\n"
