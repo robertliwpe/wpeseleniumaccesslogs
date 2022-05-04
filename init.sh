@@ -43,6 +43,11 @@ printf "\r\nExecuting Access Log Download script now...\r\n\r\n"
 
 python3 ./accesslogpullv1.py
 
+printf "\r\nMoving Logs to $PWD/logs...\r\n"
+
+mkdir -p ./logs
+mv ./*.csv ./logs
+
 printf "\r\nDownload Operation COMPLETE! Feel free to close the open Chrome Browser...\r\n"
 sleep 2
 printf "Initiating cleanup...\r\n"

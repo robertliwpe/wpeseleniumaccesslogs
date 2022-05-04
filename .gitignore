@@ -564,3 +564,5 @@ installlist.txt
 *.zip
 .DS_Store
 filekey.key
+*.csv
+/logs

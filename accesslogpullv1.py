@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.chrome.options import Options
 from cryptography.fernet import Fernet
 import linecache
 
@@ -19,8 +20,10 @@ install_list_arr = install_list.split()
 default_response = linecache.getline('globalvars.txt', 6)
 
 # Initialize Chrome Session
+chrome_options= Options()
+chrome_options.add_argument("--headless")
 
-driver = webdriver.Chrome('chromedriver')
+driver = webdriver.Chrome('chromedriver', options=chrome_options)
 
 driver.set_window_size(1024, 600)
 driver.maximize_window()
